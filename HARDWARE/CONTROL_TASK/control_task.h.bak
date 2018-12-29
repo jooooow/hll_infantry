@@ -1,0 +1,26 @@
+#ifndef __CONTROL_TASK_H__
+#define __CONTROL_TASK_H__
+
+#include "stm32f4xx.h"
+#include "sys.h"
+#include "delay.h"
+#include "timer3.h"
+#include "usart1.h"
+#include "usart3.h"
+#include "usart6.h"
+#include "can1.h"
+#include "pid.h"
+#include "remoter.h"
+#include "listener.h"
+#include "chassis.h"
+#include "gimbal.h"
+
+void InitControlTask(void);
+void ControlTask(void);
+void SaveHistory(void);
+
+void ChassisMotorListen(void);
+void GimbalMotorListen(void);
+void OnelineFlagLog(void);
+
+#endif

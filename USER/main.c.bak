@@ -1,0 +1,25 @@
+#include "control_task.h"
+#include "control.h"
+
+extern short chassis_motor_speed[6];
+extern IncrementPid fl_pid;
+extern IncrementPid fr_pid;
+extern IncrementPid bl_pid;
+extern IncrementPid br_pid;
+
+int main()
+{
+	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);
+	
+	/*初始化控制任务*/
+	InitControlTask();
+
+	while(1)
+	{
+#if (ONLINE_FLAG_LOG == 1)
+		OnelineFlagLog();
+		delay_ms(5);
+#endif
+	}
+	return 0;
+}

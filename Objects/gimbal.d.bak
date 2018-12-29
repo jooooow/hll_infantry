@@ -1,2 +1,2 @@
-.\objects\gimbal.o: HARDWARE\gimbal.c
-.\objects\gimbal.o: HARDWARE\gimbal.h
+.\objects\gimbal.o: HARDWARE\GIMBAL\gimbal.c
+.\objects\gimbal.o: HARDWARE\GIMBAL\gimbal.h

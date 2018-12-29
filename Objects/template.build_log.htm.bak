@@ -21,15 +21,15 @@ Target DLL:      STLink\ST-LINKIII-KEIL_SWO.dll V2.0.14.0_KEIL
 Dialog DLL:      TCM.DLL V1.14.4.0
  
 <h2>Project:</h2>
-C:\Users\Lenovo\Desktop\32_puro\F427Ä£°å\template.uvprojx
-Project File Date:  12/16/2018
+C:\Users\Lenovo\Desktop\32_puro\hll2019µ×ÅÌv1.0\workspace.uvprojx
+Project File Date:  12/20/2018
 
 <h2>Output:</h2>
 Build target 'Target 1'
 ".\Objects\template.axf" - 0 Error(s), 0 Warning(s).
 
 <h2>Collection of Component include folders:</h2>
-  C:\Users\Lenovo\Desktop\32_puro\F427Ä£°å\RTE
+  C:\Users\Lenovo\Desktop\32_puro\hll2019µ×ÅÌv1.0\RTE
   C:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0
 
 <h2>Collection of Component Files used:</h2>

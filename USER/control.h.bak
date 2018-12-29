@@ -1,0 +1,23 @@
+#ifndef __CONTROL_H__
+#define __CONTROL_H__
+
+/*模块索引*/
+#define FL                0  //左前轮      0x201
+#define FR                1  //右前轮      0x202
+#define BL                2  //左后轮      0x203
+#define BR                3  //右后轮      0x204
+#define PITCH             4  //云台PITCH轴 0x205
+#define YAW               5  //云台YAW轴   0x206
+#define REMOTER           6  //遥控器索引
+#define WAVEWHEEL         7  //拨轮所索引
+
+/*超时时间 单位ms*/
+#define REMOTER_LOSS_TIME 30
+#define MOTOR_LOSS_TIME   4
+
+/*打印调试使能*/
+#define ONLINE_FLAG_LOG   0  //打印ONLINE标志寄存器
+#define REMOTE_DATA_LOG   0  //打印遥控器数据
+#define CONNECT_LOSS_LOG  1  //打印连接/丢失提示
+
+#endif

@@ -1,5 +1,5 @@
-.\objects\led.o: DEVICE\led.c
-.\objects\led.o: DEVICE\led.h
+.\objects\led.o: DEVICE\LED\led.c
+.\objects\led.o: DEVICE\LED\led.h
 .\objects\led.o: .\CMISS\stm32f4xx.h
 .\objects\led.o: .\CMISS\core_cm4.h
 .\objects\led.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h

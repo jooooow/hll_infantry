@@ -1,5 +1,5 @@
-.\objects\usart1.o: DEVICE\usart1.c
-.\objects\usart1.o: DEVICE\usart1.h
+.\objects\usart1.o: DEVICE\USART\USART1\usart1.c
+.\objects\usart1.o: DEVICE\USART\USART1\usart1.h
 .\objects\usart1.o: .\CMISS\stm32f4xx.h
 .\objects\usart1.o: .\CMISS\core_cm4.h
 .\objects\usart1.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
@@ -37,3 +37,5 @@
 .\objects\usart1.o: .\FWLIB\inc\stm32f4xx_dma2d.h
 .\objects\usart1.o: .\FWLIB\inc\stm32f4xx_fmc.h
 .\objects\usart1.o: .\FWLIB\inc\stm32f4xx_sai.h
+.\objects\usart1.o: .\DEVICE\LED\led.h
+.\objects\usart1.o: .\USER\sys\sys.h

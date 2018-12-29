@@ -1,0 +1,15 @@
+#ifndef __LISTENER_H__
+#define __LISTENER_H__
+
+#include "sys.h"
+#include "remoter.h"
+#include "stdio.h"
+
+#define GET_STATE(M)     (ONLINE_FLAG & (0x01 << M))
+#define GET_OLD_STATE(M) (OLD_ONLINE_FLAG & (0x01 << M))
+
+void InitListenerTask(void);
+void ListenTask(void);
+void Listen(u8 index);
+
+#endif

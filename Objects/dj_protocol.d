@@ -1,5 +1,5 @@
-.\objects\dj_protocol.o: USERLIB\DJ_Protocol.c
-.\objects\dj_protocol.o: USERLIB\DJ_Protocol.h
+.\objects\dj_protocol.o: USERLIB\DJ_PROTOCOL\DJ_Protocol.c
+.\objects\dj_protocol.o: USERLIB\DJ_PROTOCOL\DJ_Protocol.h
 .\objects\dj_protocol.o: .\CMISS\stm32f4xx.h
 .\objects\dj_protocol.o: .\CMISS\core_cm4.h
 .\objects\dj_protocol.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h

@@ -1,0 +1,95 @@
+#include "listener.h"
+
+u8 listen_cnt[8];
+u16 ONLINE_FLAG = 0;
+u16 OLD_ONLINE_FLAG =0;
+extern u8 sbus_rx_buffer[25]; 
+extern RemoteController remote_controller;
+
+void InitListenerTask(void)
+{
+	ONLINE_FLAG = 0;
+	OLD_ONLINE_FLAG = 0;
+}
+
+
+/*
+  函数名：ListenTask
+  描述  ：监听任务
+          监听各模块在离线状况
+          并根据状态变化采取相对应操作
+  参数  ：无
+  返回值：无
+*/
+void ListenTask(void)
+{
+	static u8 i = 0;
+	/*监听各个模块*/
+	Listen(FL);
+	Listen(FR);
+	Listen(BL);
+	Listen(BR);
+	Listen(PITCH);
+	Listen(YAW);
+	Listen(REMOTER);
+	
+	/*遥控器 连接/丢失情况采取相应操作*/
+	if(GET_STATE(REMOTER) && !GET_OLD_STATE(REMOTER))
+	{
+#if (CONNECT_LOSS_LOG == 1)
+		printf("-- remoter connect! --\r\n");
+#endif
+	}
+	if(!GET_STATE(REMOTER) && GET_OLD_STATE(REMOTER))
+	{
+		memset(sbus_rx_buffer,0,18);
+		SetRemoteValue(&remote_controller,0,0,0,0,0,0);
+#if (CONNECT_LOSS_LOG == 1)
+		printf("-- remoter loss! --\r\n");
+#endif
+	}
+	
+	/*电机 连接/丢失情况采取相应操作*/
+	for(i = 0; i < 6; i++)
+	{
+	  if(GET_STATE(i) && !GET_OLD_STATE(i))
+		{
+#if (CONNECT_LOSS_LOG == 1)
+			printf("-- 0x20%d connect! --\r\n",i+1);
+#endif
+		}
+		if(!GET_STATE(i) && GET_OLD_STATE(i))
+		{
+#if (CONNECT_LOSS_LOG == 1)
+			printf("-- 0x20%d loss! --\r\n",i+1);
+#endif
+		}
+	}
+}
+
+
+/*
+  函数名：Listen
+  描述  ：监听索引为index的模块
+          如果listen_cnt[index]大于0则递减
+          listen_cnt[index]为0视为丢失
+          listen_cnt被重新装填后视为重新连接
+  参数  ：index -- 模块索引
+  返回值：无
+*/
+void Listen(u8 index)
+{
+	if(listen_cnt[index] > 0)
+	{
+		if(!GET_STATE(index))
+		{
+			ONLINE_FLAG |= (0x01 << index);
+		}
+		listen_cnt[index]--;
+	}
+	
+	if(listen_cnt[index] == 0 && GET_STATE(index))
+	{
+		ONLINE_FLAG &= ~(0x01 << index);
+	}
+}

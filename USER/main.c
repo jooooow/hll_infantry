@@ -1,16 +1,13 @@
-#include "includes.h"
-  
-extern short chassis_motor_speed[6];
-extern IncrementPid fl_pid;
-extern IncrementPid fr_pid;
-extern IncrementPid bl_pid;
-extern IncrementPid br_pid;
-extern u8 is_recv_gyro_data;
-extern u16 recv_gyro_data_cnt;
-extern u8 gyro_buf[11];
-extern u8 gyro_rx_buf[11];
-u16 raw_yaw;
-float yaw;
+#include "control_task.h"
+#include "control.h"
+
+extern short motor_speed_arr[7];
+extern IncrementPid_t fl_pid;
+extern IncrementPid_t fr_pid;
+extern IncrementPid_t bl_pid;
+extern IncrementPid_t br_pid;
+
+extern RemoteController_t remote_controller;
 
 int main()
 {
@@ -21,7 +18,11 @@ int main()
 
 	while(1)
 	{
-		
+#if (ONLINE_FLAG_LOG == 1)
+		/*打印ONLINE_FLAG以显示当前模块状态*/
+		OnelineFlagLog();
+		delay_ms(5);
+#endif
 	}
 	return 0;
 }
