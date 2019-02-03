@@ -13,7 +13,9 @@
 #include "sys.h"
 #include "stdio.h"
 
-typedef struct
+#define abs2(x) ((x)>0? (x):(-(x))) 
+
+typedef struct PPID_t
 {
 	float tar;
 	float cur;
@@ -30,9 +32,10 @@ typedef struct
 	float ki_output;
 	float kd_output;
 	float output;
+	void(*CalcPID)(struct PPID_t* pid, float inte_max_abs, float error_min_abs);
 }PositionPid_t;
 
-typedef struct
+typedef struct IPID_t
 {
 	float tar;
 	float cur;
@@ -49,9 +52,34 @@ typedef struct
 	float ki_output;
 	float kd_output;
 	float output;
+	void(*CalcPID)(struct IPID_t* pid);
 }IncrementPid_t;
 
-void CalcPositionPid(PositionPid_t* pid);
+typedef struct GPID_t
+{
+	float P;
+	float I;
+	float D;
+	
+	float CurrentError;
+	float LastError;
+	float ThirdError;
+	float ForthError;
+	
+	float Pout;
+	float Iout;
+	float Dout;
+	float PIDout;
+	
+	float IMax;
+	float PIDMax;
+	
+	float cur;
+	float tar;
+	void(*CalcPID)(struct GPID_t* pid);
+}GimbalPID_t;
+
+void CalcPositionPid(PositionPid_t* pid, float inte_max_abs, float error_min_abs);
 void CalcIncrementPid(IncrementPid_t* pid);
 
 void ResetPositionPid(PositionPid_t* pid, u8 depth, u8 tar);
@@ -60,8 +88,9 @@ void ResetIncrementPid(IncrementPid_t* pid, u8 depth, u8 tar);
 void PositionPid_tLimit(PositionPid_t* pid, float min, float max);
 void IncrementPid_tLimit(IncrementPid_t* pid, float min, float max);
 
-
 void PositionPidLog(PositionPid_t* pid);
 void IncrementPidLog(IncrementPid_t* pid);
+void CalcPitchPid(GimbalPID_t* pid);
+void CalcYawPid(GimbalPID_t* pid);
 
 #endif

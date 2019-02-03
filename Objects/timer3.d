@@ -55,7 +55,14 @@
 .\objects\timer3.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\objects\timer3.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
 .\objects\timer3.o: .\USERLIB\LISTENER\listener.h
+.\objects\timer3.o: .\HARDWARE\CONTROL_TASK\control_task.h
+.\objects\timer3.o: .\DEVICE\CAN\CAN2\can2.h
+.\objects\timer3.o: .\DEVICE\SPI\spi.h
 .\objects\timer3.o: .\HARDWARE\CHASSIS\chassis.h
 .\objects\timer3.o: .\HARDWARE\GIMBAL\gimbal.h
 .\objects\timer3.o: .\HARDWARE\SHOOTER\shooter.h
 .\objects\timer3.o: .\DEVICE\PWM\pwm.h
+.\objects\timer3.o: .\HARDWARE\GYROMAG\gyromag.h
+.\objects\timer3.o: .\DEVICE\IIC\iic.h
+.\objects\timer3.o: .\USERLIB\CALIBRATER\calibrater.h
+.\objects\timer3.o: .\USERLIB\SOFTTIMER\softtimer.h

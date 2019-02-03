@@ -40,3 +40,13 @@ void Delay_us(unsigned int t)
 		while(a--);
 	}
 }
+
+void delay_200ns(u16 time)
+{    
+   u16 i=0;  
+   while(time--)
+   {
+      i=3;
+      while(i--) ;    
+   }
+}

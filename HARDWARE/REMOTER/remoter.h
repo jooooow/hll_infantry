@@ -44,9 +44,15 @@
 #define S1_CHANGED     (S1_VALUE != OLD_S1_VALUE)
 #define S2_CHANGED     (S2_VALUE != OLD_S2_VALUE)
 
+#define S1_AT(a)       (S1_VALUE == (a))
+#define S2_AT(a)       (S2_VALUE == (a))
+
 #define S1_CHANGED_TO(a,b) ((OLD_S1_VALUE == (a)) && (S1_VALUE == (b)))
 #define S2_CHANGED_TO(a,b) ((OLD_S2_VALUE == (a)) && (S2_VALUE == (b)))
 
+#define S2_STA_AUTO 3
+#define S2_STA_CALI 1
+#define S2_STA_NEWY 2
 
 typedef struct
 {
@@ -80,6 +86,15 @@ typedef struct
 	ControlMode_t mode;
 }RemoteController_t;
 
+typedef struct
+{
+	u8 wave_begin_positive_flag;
+	u8 wave_begin_negative_flag;
+	u8 wave_stop_flag;
+	u8 fric_begin_flag;
+	u8 fric_stop_flag;
+}ShooterSignal_t;
+
 void InitRemoterTask(void);
 void RemoteTask(void);
 
@@ -90,8 +105,11 @@ void OnRemoteModeChanged(void);
 void ParseRemoterData(RemoteController_t* remoter);
 void OnSwitchChanged(void);
 void RemoterDataFilter(RemoteController_t* remoter);
+
 u8 RemoterDataCheck(void);
-void SetRemoteValue(RemoteController_t* remoter, short ch0, short ch1, short ch2, short ch3, u8 s1, u8 s2);
+void SetRemoteValue(RemoteController_t* remoter, short ch0, short ch1, short ch2, short ch3, u8 s1, u8 s2, short x, short y, short z, u8 p_l, u8 p_r, u16 key);
 void RemoterDataLog(RemoteController_t* remoter);
+
+u8 IsAtTheChannelValueFor14xtMs(short ch0, short ch1, short ch2, short ch3, u16 t);
 
 #endif

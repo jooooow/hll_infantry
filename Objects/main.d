@@ -55,7 +55,13 @@
 .\objects\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\objects\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
 .\objects\main.o: .\USERLIB\LISTENER\listener.h
+.\objects\main.o: .\DEVICE\CAN\CAN2\can2.h
+.\objects\main.o: .\DEVICE\SPI\spi.h
 .\objects\main.o: .\HARDWARE\CHASSIS\chassis.h
 .\objects\main.o: .\HARDWARE\GIMBAL\gimbal.h
 .\objects\main.o: .\HARDWARE\SHOOTER\shooter.h
 .\objects\main.o: .\DEVICE\PWM\pwm.h
+.\objects\main.o: .\HARDWARE\GYROMAG\gyromag.h
+.\objects\main.o: .\DEVICE\IIC\iic.h
+.\objects\main.o: .\USERLIB\CALIBRATER\calibrater.h
+.\objects\main.o: .\USERLIB\SOFTTIMER\softtimer.h

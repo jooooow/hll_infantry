@@ -38,3 +38,8 @@
 .\objects\usart6.o: .\FWLIB\inc\stm32f4xx_dma2d.h
 .\objects\usart6.o: .\FWLIB\inc\stm32f4xx_fmc.h
 .\objects\usart6.o: .\FWLIB\inc\stm32f4xx_sai.h
+.\objects\usart6.o: .\DEVICE\LED\led.h
+.\objects\usart6.o: .\USERLIB\PID\pid.h
+.\objects\usart6.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\objects\usart6.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
+.\objects\usart6.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h

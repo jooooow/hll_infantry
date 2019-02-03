@@ -26,12 +26,18 @@
 #include "usart3.h"
 #include "usart6.h"
 #include "can1.h"
+#include "can2.h"
+#include "spi.h"
 #include "pid.h"
 #include "remoter.h"
 #include "listener.h"
 #include "chassis.h"
 #include "gimbal.h"
 #include "shooter.h"
+#include "gyromag.h"
+#include "pwm.h"
+#include "softtimer.h"
+#include "calibrater.h"
 
 #define STATE_SWITCHD_TO(a,b) ((robot_FSM.old_state == (a)) && (robot_FSM.cur_state == (b)))
 #define START_CONTROL_TASK TIM_Cmd(TIM3,ENABLE)
@@ -45,5 +51,7 @@ void SaveHistory(void);
 
 void ChassisMotorListen(void);
 void GimbalMotorListen(void);
+
+void Report2Com(void);
 
 #endif

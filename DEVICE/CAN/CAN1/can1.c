@@ -64,11 +64,11 @@ unsigned int can_rx_cnt_arr[7] = {0,0,0,0,0,0,0};
 
 u8 wait_can_init_ok = 0;
 extern u16 ONLINE_FLAG;
-extern u8 listen_cnt[8];
+extern u8 listen_cnt[10];
 
 void CAN1_RX0_IRQHandler(void)
 {
-	static u16 can_cnt = 0;
+	static u16 can_cnt = 100;
 	CanRxMsg can1_rx_msg;
 	if (CAN_GetITStatus(CAN1,CAN_IT_FMP0)!= RESET)
 	{
@@ -76,10 +76,12 @@ void CAN1_RX0_IRQHandler(void)
 		CAN_Receive(CAN1, CAN_FIFO0, &can1_rx_msg);	
 		
 		/*等待数据稳定*/
-		if(can_cnt < 100)
-			can_cnt++;
-		else
-			wait_can_init_ok = 1;
+		if(can_cnt > 0)
+		{
+			can_cnt--;
+			if(can_cnt == 0)
+				wait_can_init_ok++;
+		}
 		
 		if(can1_rx_msg.StdId >= 0x201 && can1_rx_msg.StdId <= 0x207)
 		{
@@ -105,11 +107,11 @@ void CAN1_RX0_IRQHandler(void)
 				  RELOAD_MOTOR(BR);
 					motor_speed_arr[BR] = (can1_rx_msg.Data[2]<<8)|(can1_rx_msg.Data[3]);
 					break;
-				case 0x207:
-					can_rx_cnt_arr[WAVE]++;
-					RELOAD_MOTOR(WAVE);
-				  motor_speed_arr[WAVE] = (can1_rx_msg.Data[2]<<8)|(can1_rx_msg.Data[3]);
-				  break;
+//				case 0x207:
+//					can_rx_cnt_arr[WAVE]++;
+//					RELOAD_MOTOR(WAVE);
+//				  motor_speed_arr[WAVE] = (can1_rx_msg.Data[2]<<8)|(can1_rx_msg.Data[3]);
+//				  break;
 				default:break;
 			}
 		}

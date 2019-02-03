@@ -11,8 +11,12 @@
 #ifndef __GIMBAL_H__
 #define __GIMBAL_H__
 
+#define INITIAL_YAW_ANGLE  	 	4080
+#define INITIAL_PITCH_ANGLE   6500
+
 #include "sys.h"
 #include "pid.h"
+#include "can2.h"
 #include "remoter.h"
 
 void InitGimbalControlTask(void);
@@ -21,6 +25,8 @@ void GimbalControlTask(void);
 void R_ConvertRc2TargetAngle(void);
 void S_ConvertRc2TargetAngle(void);
 void A_ConvertRc2TargetAngle(void);
+
+void CalcGimbalPid(void);
 
 #endif
 

@@ -16,12 +16,15 @@
 #include "remoter.h"
 #include "stdio.h"
 #include "usart1.h"
+#include "control_task.h"
 
 #define GET_STATE(M)     (ONLINE_FLAG & (0x01 << M))
 #define GET_OLD_STATE(M) (OLD_ONLINE_FLAG & (0x01 << M))
 
 #define RELOAD_REMOTER   listen_cnt[REMOTER] = REMOTER_LOSS_TIME
 #define RELOAD_MOTOR(a)  listen_cnt[a] = MOTOR_LOSS_TIME
+#define RELOAD_GYRO			 listen_cnt[GYRO] = GYRO_LOSS_TIME
+#define RELOAD_MAG		   listen_cnt[MAG] = MAG_LOSS_TIME
 
 void InitListenerTask(void);
 void ListenTask(void);

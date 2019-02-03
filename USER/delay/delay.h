@@ -11,6 +11,6 @@ void delay_ms(unsigned int t);
 void delay_us(unsigned int t);
 void Delay_ms(unsigned int t);
 void Delay_us(unsigned int t);
-
+void delay_200ns(u16 time);
 
 #endif

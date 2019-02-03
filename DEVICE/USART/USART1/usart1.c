@@ -110,7 +110,7 @@ void USART1_IRQHandler(void)
     res = USART1->SR;
 		res = USART1->DR;
     res = DMA_GetCurrDataCounter(DMA2_Stream5);//获取当前接收的数据量 
-    DMA2_Stream5->NDTR = 18;//重新设置传输量为32 
+    DMA2_Stream5->NDTR = 18;//重新设置传输量为18 
     DMA_Cmd(DMA2_Stream5,ENABLE);
 		is_remote_received = 1;
   } 

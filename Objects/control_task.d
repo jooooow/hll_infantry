@@ -55,7 +55,13 @@
 .\objects\control_task.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\objects\control_task.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
 .\objects\control_task.o: .\USERLIB\LISTENER\listener.h
+.\objects\control_task.o: .\DEVICE\CAN\CAN2\can2.h
+.\objects\control_task.o: .\DEVICE\SPI\spi.h
 .\objects\control_task.o: .\HARDWARE\CHASSIS\chassis.h
 .\objects\control_task.o: .\HARDWARE\GIMBAL\gimbal.h
 .\objects\control_task.o: .\HARDWARE\SHOOTER\shooter.h
 .\objects\control_task.o: .\DEVICE\PWM\pwm.h
+.\objects\control_task.o: .\HARDWARE\GYROMAG\gyromag.h
+.\objects\control_task.o: .\DEVICE\IIC\iic.h
+.\objects\control_task.o: .\USERLIB\CALIBRATER\calibrater.h
+.\objects\control_task.o: .\USERLIB\SOFTTIMER\softtimer.h

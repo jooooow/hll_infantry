@@ -365,7 +365,7 @@
               <MiscControls></MiscControls>
               <Define>STM32F427_437xx,USE_STDPERIPH_DRIVER</Define>
               <Undefine></Undefine>
-              <IncludePath>.\CMISS;.\FWLIB\inc;.\USER;.\DEVICE;.\USER\delay;.\USER\sys;.\USERLIB;.\HARDWARE;.\DEVICE\CAN\CAN1;.\DEVICE\LED;.\DEVICE\TIMER\TIMER3;.\DEVICE\USART\USART1;.\DEVICE\USART\USART3;.\DEVICE\USART\USART6;.\HARDWARE\CHASSIS;.\HARDWARE\CONTROL_TASK;.\HARDWARE\GIMBAL;.\HARDWARE\JUDGEMENT_SYSTEM;.\HARDWARE\REMOTER;.\USERLIB\DJ_PROTOCOL;.\USERLIB\LISTENER;.\USERLIB\PID;.\HARDWARE\SHOOTER;.\DEVICE\PWM</IncludePath>
+              <IncludePath>.\CMISS;.\FWLIB\inc;.\USER;.\DEVICE;.\USER\delay;.\USER\sys;.\USERLIB;.\HARDWARE;.\DEVICE\CAN\CAN1;.\DEVICE\LED;.\DEVICE\TIMER\TIMER3;.\DEVICE\USART\USART1;.\DEVICE\USART\USART3;.\DEVICE\USART\USART6;.\HARDWARE\CHASSIS;.\HARDWARE\CONTROL_TASK;.\HARDWARE\GIMBAL;.\HARDWARE\JUDGEMENT_SYSTEM;.\HARDWARE\REMOTER;.\USERLIB\DJ_PROTOCOL;.\USERLIB\LISTENER;.\USERLIB\PID;.\HARDWARE\SHOOTER;.\DEVICE\PWM;.\DEVICE\SPI;.\HARDWARE\GYROMAG;.\DEVICE\CAN\CAN2;.\DEVICE\IIC;.\USERLIB\SOFTTIMER;.\USERLIB\CALIBRATER</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -659,6 +659,11 @@
               <FilePath>.\DEVICE\CAN\CAN1\can1.c</FilePath>
             </File>
             <File>
+              <FileName>can2.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\DEVICE\CAN\CAN2\can2.c</FilePath>
+            </File>
+            <File>
               <FileName>timer3.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\DEVICE\TIMER\TIMER3\timer3.c</FilePath>
@@ -683,16 +688,21 @@
               <FileType>1</FileType>
               <FilePath>.\DEVICE\PWM\pwm.c</FilePath>
             </File>
+            <File>
+              <FileName>spi.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\DEVICE\SPI\spi.c</FilePath>
+            </File>
+            <File>
+              <FileName>iic.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\DEVICE\IIC\iic.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
           <GroupName>USERLIB</GroupName>
           <Files>
-            <File>
-              <FileName>remoter.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\HARDWARE\REMOTER\remoter.c</FilePath>
-            </File>
             <File>
               <FileName>DJ_Protocol.c</FileName>
               <FileType>1</FileType>
@@ -707,6 +717,16 @@
               <FileName>pid.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\USERLIB\PID\pid.c</FilePath>
+            </File>
+            <File>
+              <FileName>softtimer.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\USERLIB\SOFTTIMER\softtimer.c</FilePath>
+            </File>
+            <File>
+              <FileName>calibrater.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\USERLIB\CALIBRATER\calibrater.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -734,9 +754,19 @@
               <FilePath>.\HARDWARE\JUDGEMENT_SYSTEM\judge_system.c</FilePath>
             </File>
             <File>
+              <FileName>remoter.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\HARDWARE\REMOTER\remoter.c</FilePath>
+            </File>
+            <File>
               <FileName>shooter.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\HARDWARE\SHOOTER\shooter.c</FilePath>
+            </File>
+            <File>
+              <FileName>gyromag.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\HARDWARE\GYROMAG\gyromag.c</FilePath>
             </File>
           </Files>
         </Group>

@@ -27,7 +27,11 @@ void A_ConvertRc2TargetSpeed(void);
 void CalcChassisPID(void);
 void LimitChassisOutput(void);
 
+void ChassisFollow(void);
+void ChassisTranslation(void);
 
+void NewYork(void);
+u16 GetNewYorkTargetManchanicalAngle(void);
 
 #endif
 

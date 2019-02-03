@@ -1,10 +1,10 @@
 #include "listener.h"
 
-u8 listen_cnt[8] = {0,0,0,0,0,0,0,0};
+u8 listen_cnt[10] = {0,0,0,0,0,0,0,0,0,0};
 
 /*ONLINE_FLAG寄存器 表示模块在线/离线情况 1在线 0离线*/
 u16 ONLINE_FLAG = 0;
-u16 OLD_ONLINE_FLAG =0;
+u16 OLD_ONLINE_FLAG = 0;
 
 extern u8 is_remote_received;
 extern u8 sbus_rx_buffer[25]; 
@@ -24,8 +24,10 @@ void InitListenerTask(void)
 	listen_cnt[YAW] = MOTOR_LOSS_TIME;
 	listen_cnt[WAVE] = MOTOR_LOSS_TIME;
 	listen_cnt[REMOTER] = REMOTER_LOSS_TIME;
-	ONLINE_FLAG = 0xFF;
-	OLD_ONLINE_FLAG = 0xFF;
+	listen_cnt[GYRO] = GYRO_LOSS_TIME;
+	listen_cnt[MAG] = MAG_LOSS_TIME;
+	ONLINE_FLAG = 0xFFFF;
+	OLD_ONLINE_FLAG = 0xFFFF;
 }
 
 
@@ -55,6 +57,8 @@ void ListenTask(void)
 */
 void ListenModule(void)
 {
+	Listen(GYRO);
+	Listen(MAG);
 	Listen(FL);
 	Listen(FR);
 	Listen(BL);
@@ -75,6 +79,36 @@ void ListenModule(void)
 */
 void OnModuleStateChanged(void)
 {
+	/*陀螺仪 连接/丢失情况采取相应操作*/
+	if(GET_STATE(GYRO) && !GET_OLD_STATE(GYRO))
+  {
+#if (CONNECT_LOSS_LOG == 1)
+		printf("-- GYRO connect! --\r\n");
+#endif
+	}
+	if(!GET_STATE(GYRO) && GET_OLD_STATE(GYRO))
+	{
+#if (CONNECT_LOSS_LOG == 1)
+		printf("-- GYRO loss! --\r\n");
+#endif
+	}
+	
+	
+	/*地磁仪 连接/丢失情况采取相应操作*/
+	if(GET_STATE(MAG) && !GET_OLD_STATE(MAG))
+  {
+#if (CONNECT_LOSS_LOG == 1)
+		printf("-- MAG connect! --\r\n");
+#endif
+	}
+	if(!GET_STATE(MAG) && GET_OLD_STATE(MAG))
+	{
+#if (CONNECT_LOSS_LOG == 1)
+		printf("-- MAG loss! --\r\n");
+#endif
+	}
+	
+	
 	/*遥控器 连接/丢失情况采取相应操作*/
 	if(GET_STATE(REMOTER) && !GET_OLD_STATE(REMOTER))
 	{
@@ -86,7 +120,7 @@ void OnModuleStateChanged(void)
 	{
 		/*丢失则重置DMA*/
 		ResetUsart1DMA();
-		SetRemoteValue(&remote_controller,0,0,0,0,0,0);
+		SetRemoteValue(&remote_controller,0,0,0,0,0,0,0,0,0,0,0,0);
 #if (CONNECT_LOSS_LOG == 1)
 		printf("-- remoter loss! --\r\n");
 #endif
@@ -169,6 +203,35 @@ void OnModuleStateChanged(void)
 		ResetIncrementPid(&br_pid,3,0);
 #if (CONNECT_LOSS_LOG == 1)
 		printf("-- WAVE loss! --\r\n");
+#endif
+	}
+	
+	
+		/*BR 连接/丢失情况采取相应操作*/
+	if(GET_STATE(PITCH) && !GET_OLD_STATE(PITCH))
+  {
+#if (CONNECT_LOSS_LOG == 1)
+		printf("-- PITCH connect! --\r\n");
+#endif
+	}
+	if(!GET_STATE(PITCH) && GET_OLD_STATE(PITCH))
+	{
+#if (CONNECT_LOSS_LOG == 1)
+		printf("-- PITCH loss! --\r\n");
+#endif
+	}
+	
+		/*BR 连接/丢失情况采取相应操作*/
+	if(GET_STATE(YAW) && !GET_OLD_STATE(YAW))
+  {
+#if (CONNECT_LOSS_LOG == 1)
+		printf("-- YAW connect! --\r\n");
+#endif
+	}
+	if(!GET_STATE(YAW) && GET_OLD_STATE(YAW))
+	{
+#if (CONNECT_LOSS_LOG == 1)
+		printf("-- YAW loss! --\r\n");
 #endif
 	}
 }

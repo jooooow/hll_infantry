@@ -12,12 +12,21 @@ extern IncrementPid_t br_pid;
   参数  ：pid ：pid结构体变量
   返回值：无
 */
-void CalcPositionPid(PositionPid_t* pid)
+void CalcPositionPid(PositionPid_t* pid, float inte_max_abs, float error_min_abs)
 {
 	pid->error = pid->tar - pid->cur;
 	
+	if(fabs(pid->error) < error_min_abs)
+		pid->error = 0;
+	
 	pid->kp_output = pid->kp * pid->error;
 	pid->integration += pid->error;
+	
+	if(pid->integration > inte_max_abs)
+		pid->integration = inte_max_abs;
+	else if(pid->integration < -inte_max_abs)
+		pid->integration = -inte_max_abs;
+	
 	pid->ki_output = pid->ki * pid->integration;
 	pid->kd_output = pid->kd * (pid->error - pid->old_error);
 	
@@ -158,4 +167,92 @@ void IncrementPidLog(IncrementPid_t* pid)
 	pid->old_error,
 	pid->old_old_error,
 	pid->output);
+}
+
+void CalcPitchPid(GimbalPID_t* pid)
+{
+	float index_i;
+	static float  sump;
+	pid->CurrentError = pid->tar - pid->cur;
+	
+	
+	if(abs2(pid->CurrentError)<=2)pid->CurrentError=0;
+	else if(pid->CurrentError>2)pid->CurrentError-=2;
+	else if(pid->CurrentError<-2)pid->CurrentError+=2;
+	
+	pid->Pout = pid->P * pid->CurrentError;
+	
+	if(abs2(pid->CurrentError) > 100)
+	{
+		index_i = 0.0;
+	}
+	else if(abs2(pid->CurrentError) >= 50 && abs2(pid->CurrentError) <= 100)
+	{	
+		index_i = (100 - abs2(pid->CurrentError)) / 50;
+		sump +=( pid->CurrentError)/2;
+	}
+	else 
+	{
+		index_i = 1.;
+		sump += (pid->CurrentError)/2;
+	}
+	sump = sump > pid->IMax ? pid->IMax : sump;
+	sump = sump < -pid->IMax ? -pid->IMax : sump; 
+	pid->Iout = index_i * pid->I * sump;
+	pid->Iout = pid->Iout > pid->IMax ? pid->IMax : pid->Iout;
+	pid->Iout = pid->Iout < -pid->IMax ? -pid->IMax : pid->Iout;
+	
+	pid->Dout = pid->D * (pid->CurrentError + pid->LastError- pid->ThirdError-pid->ForthError);
+	
+	pid->PIDout = pid->Pout + pid->Iout  + pid->Dout;
+	
+	pid->PIDout = pid->PIDout > pid->PIDMax ? pid->PIDMax : pid->PIDout;
+	pid->PIDout = pid->PIDout < -pid->PIDMax ? -pid->PIDMax : pid->PIDout;
+	
+
+  pid->ForthError = pid->ThirdError;
+	pid->ThirdError = pid->LastError;
+	pid->LastError = pid->CurrentError;
+}
+
+void CalcYawPid(GimbalPID_t* pid)
+{
+	static short sum, sump;
+	float index_i;
+
+	pid->CurrentError = pid->tar - pid->cur;
+	
+	if(abs2(pid->CurrentError)<=2)pid->CurrentError=0;
+	else if(pid->CurrentError>2)pid->CurrentError-=2;
+	else if(pid->CurrentError<-2)pid->CurrentError+=2;
+	
+	pid->Pout = pid->P * pid->CurrentError;
+	
+	if(abs2(pid->CurrentError) > 100)
+	{
+		index_i = 0;
+	}
+	else if(abs2(pid->CurrentError) >= 50 && abs2(pid->CurrentError) <= 100)
+	{	
+		index_i = (100 - abs2(pid->CurrentError)) / 100;
+		sum += pid->CurrentError;
+	}
+	else 
+	{
+		index_i = 1.;
+		sum += pid->CurrentError;
+	}
+	
+	sum = sum > pid->IMax ? pid->IMax : sum;
+	sum = sum < -pid->IMax ? -pid->IMax : sum; 
+	pid->Iout = index_i * pid->I * sum;
+	
+	pid->Dout = pid->D * (pid->CurrentError - pid->LastError);
+	
+	pid->PIDout = pid->Pout + pid->Iout + pid->Dout;
+	
+	pid->PIDout = pid->PIDout > pid->PIDMax ? pid->PIDMax : pid->PIDout;
+	pid->PIDout = pid->PIDout < -pid->PIDMax ? -pid->PIDMax : pid->PIDout;
+	
+	pid->LastError = pid->CurrentError;
 }
